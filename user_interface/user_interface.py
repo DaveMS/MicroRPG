@@ -6,9 +6,9 @@ from actions.drop_action import DropAction
 from actions.attack_action import AttackAction
 from user_interface.action_response_text_mapping import action_response_text
 from user_interface.event_strings import EventStrings
-import os
 
-from user_interface.utilities import get_user_input, select_item, select_character_target
+from user_interface.utilities import get_user_input, select_item, select_character_target, clear
+import os
 
 
 class UserInterface:
@@ -30,7 +30,7 @@ class UserInterface:
         print(self.__event_strings.event_to_string(evnt))
 
     def __display_game_state(self):
-        os.system("cls")
+        clear()
         print(self.__get_room_description(self.__dungeon.current_room))
         print()
         print(f"Player: {self.__player.name}")
@@ -87,7 +87,7 @@ class UserInterface:
             return False, None
 
     def __view_health_screen(self):
-        os.system("cls")
+        clear()
         print("Health Status: ")
         self.__player.anatomy.print_anatomy_status()
         print()
@@ -101,7 +101,7 @@ class UserInterface:
         return True, PickupAction(self.__player.id, current_room.items[item_index].id)
 
     def perform_inventory_action(self):
-        os.system("cls")
+        clear()
         print("Inventory: ")
         for item in self.__player.inventory.contents:
             print(f"{item.name} weight: {item.weight}", end="")

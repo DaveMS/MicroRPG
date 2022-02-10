@@ -1,4 +1,5 @@
 import re
+import os
 
 
 def get_user_input(prompt, allowed_values=[], print_allowed_values=True, allow_cancel=True, convert_to_lower=True):
@@ -62,3 +63,7 @@ def select_item(prompt, items):
     if not success:
         return False, None
     return (True, int(index_string))
+
+
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
