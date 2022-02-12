@@ -42,9 +42,10 @@ class UserInterface:
 
     def __get_room_description(self, room):
         desc = room.description + f"{os.linesep}{os.linesep}"
-        if len(room.monsters) > 0:
+        alive_monsters = room.get_monsters()
+        if len(alive_monsters) > 0:
             desc += f"{os.linesep}{os.linesep}You see some monsters:"
-            for monster in room.monsters:
+            for monster in alive_monsters:
                 if monster.is_alive:
                     desc += f"{os.linesep} {monster.name}"
             desc += f"{os.linesep}{os.linesep}"
@@ -222,8 +223,8 @@ class UserInterface:
           return False, None
 
         selected_weapon = possible_weapons[int(index_string)]
-        possible_targets = current_room.monsters
+        possible_targets = current_room.get_monsters()
         success, target_monster_index = select_character_target(possible_targets)
         if not success:
             return False, None
-        return True, AttackAction(self.__player.id, current_room.monsters[target_monster_index].id, selected_weapon.id)
+        return True, AttackAction(self.__player.id, possible_targets[target_monster_index].id, selected_weapon.id)

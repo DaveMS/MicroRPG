@@ -12,3 +12,6 @@ class Room:
         self.exit_east_room_id = None
         self.exit_south_room_id = None
         self.exit_west_room_id = None
+
+    def get_monsters(self):
+        return [x for x in self.monsters if x.is_alive]

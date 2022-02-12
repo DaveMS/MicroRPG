@@ -23,15 +23,14 @@ class Dungeon:
             character.add_action_points_for_new_turn()
 
     def perform_ai_turns(self):
-        for monster in self.current_room.monsters:
-            if monster.is_alive:
-                monster.attack(self.player)
+        for monster in self.current_room.get_monsters():
+            monster.attack(self.player)
 
     def get_next_character_to_act(self):
         if not self.player.has_ended_turn:
             return self.player
 
-        for monster in self.current_room.monsters:
+        for monster in self.current_room.get_monsters():
             if monster.is_alive and not monster.has_ended_turn:
                 return monster
 
@@ -40,9 +39,7 @@ class Dungeon:
     def num_enemies_alive(self):
         enemies_alive = 0
         for room in self.rooms:
-            for monster in room.monsters:
-                if monster.is_alive:
-                    enemies_alive += 1
+            enemies_alive += len(room.get_monsters())
         return enemies_alive
 
     def get_character_by_id(self, character_id):
@@ -63,5 +60,5 @@ class Dungeon:
     def __get_all_characters(self):
         characters = [self.player]
         for room in self.rooms:
-            characters.extend(room.monsters)
+            characters.extend(room.get_monsters())
         return characters
