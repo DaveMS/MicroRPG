@@ -8,5 +8,5 @@ def create_kick():
         name="kick",
         weight=0,
         equipable=None,
-        weapon=Weapon(DiceRoll(1, 2), DiceRoll(1, 2))
+        weapon=Weapon(DiceRoll(1, 2), DiceRoll(1, 2), 2)
     )

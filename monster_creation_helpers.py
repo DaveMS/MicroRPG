@@ -1,3 +1,4 @@
+from ai_controller import AIController
 from character import Character
 from attributes import Attributes
 from skills import Skills
@@ -15,22 +16,24 @@ def create_monster(monster_type, dungeon):
 
 def __create_goblin(dungeon):
     dagger = create_item("dagger")
-    char = Character("Goblin", [
+    char = Character("Goblin", 5, 5, [
         create_item("boots"),
         dagger
     ], create_humanoid_anatomy(0.5), Attributes(6, 12, 4), Skills(attack=12, defence=14), dungeon)
-    char.equip_item(dagger.id)
+    char.equip_item(dagger.id, False)
+    char.character_controller = AIController(char, dungeon)
     return char
 
 
 def __create_skeleton(dungeon):
     leather = create_item("leather_chest")
     sword = create_item("short_sword")
-    char = Character("Skeleton", [
+    char = Character("Skeleton", 5, 7, [
         create_item("necklace"),
         leather,
         sword
     ], create_humanoid_anatomy(0.75), Attributes(8, 5, 2), Skills(attack=15, defence=13), dungeon)
-    char.equip_item(leather.id)
-    char.equip_item(sword.id)
+    char.equip_item(leather.id, False)
+    char.equip_item(sword.id, False)
+    char.character_controller = AIController(char, dungeon)
     return char

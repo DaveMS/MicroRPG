@@ -7,4 +7,5 @@ class MoveAction:
     self.room_id = room_id
 
 class MoveActionResponse(Enum):
-  ok = 1
+    ok = 1,
+    not_enough_ap = 2

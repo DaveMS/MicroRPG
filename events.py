@@ -27,3 +27,9 @@ class AttackMissedEvent:
 class DiedEvent:
     def __init__(self, character_id):
         self.character_id = character_id
+
+
+class TurnEndedEvent:
+
+    def __init__(self, character_id):
+        self.character_id = character_id

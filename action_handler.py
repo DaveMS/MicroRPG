@@ -1,3 +1,5 @@
+from action_handlers.end_turn_action_handler import EndTurnActionHandler
+from actions.end_turn_action import EndTurnAction
 from actions.move_action import MoveAction
 from actions.attack_action import AttackAction
 from actions.drop_action import DropAction
@@ -22,7 +24,8 @@ class ActionHandler:
             DropAction.__name__: DropActionHandler(dungeon),
             EquipAction.__name__: EquipActionHandler(dungeon),
             PickupAction.__name__: PickupActionHandler(dungeon),
-            UnequipAction.__name__: UnequipActionHandler(dungeon)
+            UnequipAction.__name__: UnequipActionHandler(dungeon),
+            EndTurnAction.__name__: EndTurnActionHandler(dungeon)
         }
 
     def handle_action(self, action):

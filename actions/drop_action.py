@@ -8,4 +8,5 @@ class DropAction:
 
 class DropActionResponse(Enum):
   ok = 1,
-  item_not_in_inventory = 2
+  item_not_in_inventory = 2,
+  not_enough_ap = 3

@@ -1,9 +1,11 @@
+from actions.end_turn_action import EndTurnAction
 from actions.move_action import MoveAction
 from actions.pickup_action import PickupAction
 from actions.equip_action import EquipAction
 from actions.unequip_action import UnequipAction
 from actions.drop_action import DropAction
 from actions.attack_action import AttackAction
+from events import TurnEndedEvent
 from user_interface.action_response_text_mapping import action_response_text
 from user_interface.event_strings import EventStrings
 
@@ -28,12 +30,14 @@ class UserInterface:
 
     def handle_event(self, evnt):
         print(self.__event_strings.event_to_string(evnt))
+        input("Press Enter to continue...")
 
     def __display_game_state(self):
         clear()
         print(self.__get_room_description(self.__dungeon.current_room))
         print()
-        print(f"Player: {self.__player.name}")
+        print(
+            f"Player: {self.__player.name} AP: {self.__player.action_points}/{self.__player.max_action_points} (+{self.__player.action_points_per_turn} per turn)")
         print()
 
     def __get_room_description(self, room):
@@ -63,7 +67,7 @@ class UserInterface:
         return desc
 
     def __get_user_action(self, last_error):
-        root_actions = ["(m)ove", "(a)ttack", "(p)ickup", "(i)nventory", "(h)ealth"]
+        root_actions = ["(m)ove", "(a)ttack", "(p)ickup", "(i)nventory", "(h)ealth", "(e)nd turn"]
 
         if last_error is not None:
             print(action_response_text[last_error])
@@ -86,12 +90,18 @@ class UserInterface:
             self.__view_health_screen()
             return False, None
 
+        if chosen_action in ("end turn", "e"):
+            return self.__get_end_turn_action()
+
     def __view_health_screen(self):
         clear()
         print("Health Status: ")
         self.__player.anatomy.print_anatomy_status()
         print()
         input("Press enter to continue...")
+
+    def __get_end_turn_action(self):
+        return True, EndTurnAction(self.__player.id)
 
     def __get_pickup_action(self):
         current_room = self.__dungeon.current_room

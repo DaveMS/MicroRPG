@@ -14,6 +14,7 @@ def create_character(dungeon):
 
     char = Character(
         name,
+        5, 8,
         [
             dagger,
             leather,
@@ -24,8 +25,7 @@ def create_character(dungeon):
         Skills(attack=15, defence=15),
         dungeon)
 
-    char.equip_item(dagger.id)
-    char.equip_item(leather.id)
-    char.equip_item(helm.id)
-
+    char.equip_item(dagger.id, False)
+    char.equip_item(leather.id, False)
+    char.equip_item(helm.id, False)
     return char

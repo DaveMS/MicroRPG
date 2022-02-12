@@ -11,7 +11,5 @@ class EquipActionResponse(Enum):
   item_not_in_inventory = 2,
   item_is_not_equipable = 3,
   item_is_already_equipped = 4,
-  no_slots_free_to_equip = 5
-  
-  
-  
+  no_slots_free_to_equip = 5,
+  not_enough_ap = 6

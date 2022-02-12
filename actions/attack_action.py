@@ -11,4 +11,5 @@ class AttackAction:
 
 class AttackActionResponse(Enum):
     ok = 1,
-    no_weapon = 2
+    no_weapon = 2,
+    not_enough_ap = 3

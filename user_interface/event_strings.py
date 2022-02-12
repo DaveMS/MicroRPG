@@ -9,7 +9,8 @@ class EventStrings:
             events.AttackHitEvent.__name__: self.__attack_hit_event,
             events.DiedEvent.__name__: self.__died_event,
             events.AttackMissedEvent.__name__: self.__attack_missed_event,
-            events.AttackBlockedByArmourEvent.__name__: self.__attack_blocked_by_armour_event
+            events.AttackBlockedByArmourEvent.__name__: self.__attack_blocked_by_armour_event,
+            events.TurnEndedEvent.__name__: self.__turn_ended_event
         }
 
     def event_to_string(self, event):
@@ -41,3 +42,7 @@ class EventStrings:
     def __died_event(self, event):
         character = self.__dungeon.get_character_by_id(event.character_id)
         return f"{character.name} died!"
+
+    def __turn_ended_event(self, event):
+        character = self.__dungeon.get_character_by_id(event.character_id)
+        return f"{character.name} ended their turn."

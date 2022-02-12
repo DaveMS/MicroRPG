@@ -50,7 +50,7 @@ def __create_dagger():
         name="dagger",
         weight=2,
         equipable=Equipable([BodyPartType.hand]),
-        weapon=Weapon(DiceRoll(2, 4), DiceRoll(1, 6))
+        weapon=Weapon(DiceRoll(2, 4), DiceRoll(1, 6), 3)
     )
 
 
@@ -59,7 +59,7 @@ def __create_short_sword():
         name="short sword",
         weight=5,
         equipable=Equipable([BodyPartType.hand]),
-        weapon=Weapon(DiceRoll(2, 8), DiceRoll(1, 8))
+        weapon=Weapon(DiceRoll(2, 8), DiceRoll(1, 8), 4)
     )
 
 

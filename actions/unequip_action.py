@@ -9,4 +9,5 @@ class UnequipAction:
 class UnequipActionResponse(Enum):
   ok = 1,
   item_not_in_inventory = 2,
-  item_is_not_equipped = 3
+  item_is_not_equipped = 3,
+  not_enough_ap = 4
