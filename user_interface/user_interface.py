@@ -205,8 +205,25 @@ class UserInterface:
 
     def __get_attack_action(self):
         current_room = self.__dungeon.current_room
+
+        possible_weapons = self.__player.get_weapons()
+        for i in range(len(possible_weapons)):
+          print(f"{i}) {possible_weapons[i].name} AP: {possible_weapons[i].weapon.action_point_cost}  ( ", end="")
+          for body_part in possible_weapons[i].equipable.equipped_body_parts:
+            print(f"{body_part.name}  ", end="")
+          print(")")
+        print()
+
+        prompt = "Select a weapon to attack with: "
+        allowed_values = [str(i) for i in range(len(possible_weapons))]
+        success, index_string = get_user_input(prompt=prompt, print_allowed_values=False, allowed_values=allowed_values)
+
+        if not success:
+          return False, None
+
+        selected_weapon = possible_weapons[int(index_string)]
         possible_targets = current_room.monsters
         success, target_monster_index = select_character_target(possible_targets)
         if not success:
             return False, None
-        return True, AttackAction(self.__player.id, current_room.monsters[target_monster_index].id)
+        return True, AttackAction(self.__player.id, current_room.monsters[target_monster_index].id, selected_weapon.id)

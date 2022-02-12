@@ -15,6 +15,9 @@ class BodyPart:
         self.equipped_item = None
         self.loss_is_fatal = loss_is_fatal
         self.natural_weapon = natural_weapon
+        
+        if self.natural_weapon is not None:
+          self.natural_weapon.equipable.equipped_body_parts = [ self ]
 
     def print_body_part_status(self, nesting_level=0):
         base_status = "   " * nesting_level + f" {self.name} {self.health}/{self.max_health}"
